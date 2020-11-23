@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import {Mopidy} from 'mopidy';
+import { Mopidy } from 'mopidy';
 import { environment } from './../../environments/environment';
 import {MessageService} from './message.service';
 import {AppConfig} from './config.service';
