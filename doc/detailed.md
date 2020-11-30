@@ -235,13 +235,57 @@ Simply open the file ```assets/config/config.production.ts``` in your HydraPlaye
 Change the ports and ip addressed to your needs. Thats all. 
 
 HydraPlay needs to be build from source. 
-1. go to hydraplay source folder
-2. call `npm install` ( you will need node installed on the host/pi)
-3. call `ng build` 
-4. after the build you will find the application in the `dist`folder.
-5. `dist` folder needs to be known by the snapcast.conf file. 
-6. edit snapcast conf file and add the location if your `dist` folder to the
+1. you will need `nodejs` installed to build correctly.
+2. `sudo apt update`
+   `sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates`
+   `curl -sL https://deb.nodesource.com/setup_10.x | sudo bash`
+3. go to hydraplay source folder
+4. call `npm install`
+5. call `ng build` 
+6. after the build you will find the application in the `dist`folder.
+7. `dist` folder needs to be known by the snapcast.conf file. 
+   `nano /etc/snapserver.conf`
+8. edit snapcast conf file and add the location if your `dist` folder to the
    http section.
+ 
+```###############################################################################
+#     ______                                                                  #
+#    / _____)                                                                 #
+#   ( (____   ____   _____  ____    ___  _____   ____  _   _  _____   ____    #
+#    \____ \ |  _ \ (____ ||  _ \  /___)| ___ | / ___)| | | || ___ | / ___)   #
+#    _____) )| | | |/ ___ || |_| ||___ || ____|| |     \ V / | ____|| |       #
+#   (______/ |_| |_|\_____||  __/ (___/ |_____)|_|      \_/  |_____)|_|       #
+#                          |_|                                                #
+#                                                                             #
+#  Snapserver config file                                                     #
+#                                                                             #
+###############################################################################
+
+# default values are commented
+# uncomment and edit to change them
+
+
+# HTTP RPC ####################################################################
+#
+[http]
+# enable HTTP Json RPC (HTTP POST and websockets)
+enabled = true
+
+# address to listen on, can be specified multiple times
+# use "0.0.0.0" to bind to any IPv4 address or :: to bind to any IPv6 address
+# or "127.0.0.1" or "::1" to bind to localhost IPv4 or IPv6, respectively
+# use the address of a specific network interface to just listen to and accept
+# connections from that interface
+bind_to_address = 0.0.0.0
+
+# which port the server should listen to
+port = 1780
+
+# serve a website from the doc_root location
+doc_root = HydraPlay/hydraplay/dist
+#
+
+```
   
 ## Development server
 
